@@ -10,9 +10,25 @@
 
 ### 🏠 [Homepage](https://git.io/Jeun2)
 
+## Pre-requisites
+PRAW (https://praw.readthedocs.io/en/latest/) is required for this script to run. To install it:
+```sh 
+$ pip3 install praw
+```
+Also, inside the script you need to modify the access lines (as described [here](http://www.storybench.org/how-to-scrape-reddit-with-python/))
+```sh
+reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
+                     client_secret='YOUR_CLIENT_SECRET',
+                     user_agent='YOUR_APP_NAME',
+                     username='YOUR_USERNAME',
+                     password='YOUR_PASSWORD')
+```
+
 ## Usage
 
 ```sh
+$ python3 scrapper.py
+
 usage: scrapper.py [-h] [-l LIMIT] [-p PERIOD] subreddit
 
 positional arguments:
