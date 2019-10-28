@@ -10,16 +10,22 @@
 
 ### 🏠 [Homepage](https://git.io/Jeun2)
 
-## Install
-
-```sh
-npm install
-```
-
 ## Usage
 
 ```sh
-python3 scraperr.py SUBREDDIT
+usage: scrapper.py [-h] [-l LIMIT] [-p PERIOD] subreddit
+
+positional arguments:
+  subreddit             The subreddit from which you wish to download the
+                        pictures
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -l LIMIT, --limit LIMIT
+                        Limit the number of posts to download (default: 10)
+  -p PERIOD, --period PERIOD
+                        The period from when to download the pictures
+                        (default: day) -- options: day, month, year, all
 ```
 
 ## Author
