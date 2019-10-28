@@ -1,2 +1,2 @@
-# reddit-image-scraper
+# scraperr
 Reddit image scraper made in Python
