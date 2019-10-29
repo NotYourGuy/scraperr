@@ -6,11 +6,11 @@ import praw
 import urllib
 
 # Initialize reddit using your credentials http://www.storybench.org/how-to-scrape-reddit-with-python/
-reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
-                     client_secret='YOUR_CLIENT_SECRET',
-                     user_agent='YOUR_APP_NAME',
-                     username='YOUR_USERNAME',
-                     password='YOUR_PASSWORD')
+reddit = praw.Reddit(client_id=os.getenv('CLIENT_ID', 'YOUR_CLIENT_ID'),
+                     client_secret=os.getenv('CLIENT_SECRET', 'YOUR_CLIENT_SECRET'),
+                     user_agent=os.getenv('USER_AGENT', 'YOUR_APP_NAME'),
+                     username=os.getenv('USERNAME', 'YOUR_USERNAME'),
+                     password=os.getenv('PASSWORD', 'YOUR_PASSWORD'))
 
 DOWNLOADS_DIR = 'reddit-wallpapers/'
 

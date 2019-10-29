@@ -17,12 +17,20 @@ $ pip3 install praw
 ```
 Also, inside the script you need to modify the access lines (as described [here](http://www.storybench.org/how-to-scrape-reddit-with-python/))
 ```sh
-reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
-                     client_secret='YOUR_CLIENT_SECRET',
-                     user_agent='YOUR_APP_NAME',
-                     username='YOUR_USERNAME',
-                     password='YOUR_PASSWORD')
+reddit = praw.Reddit(client_id=os.getenv('CLIENT_ID', 'YOUR_CLIENT_ID'),
+                     client_secret=os.getenv('CLIENT_SECRET', 'YOUR_CLIENT_SECRET'),
+                     user_agent=os.getenv('USER_AGENT', 'YOUR_APP_NAME'),
+                     username=os.getenv('USERNAME', 'YOUR_USERNAME'),
+                     password=os.getenv('PASSWORD', 'YOUR_PASSWORD'))
 ```
+
+Alternatively, you can set the following environment variables when running the script:
+
+* CLIENT_ID: 14 character app client ID
+* CLIENT_SECRET: 27 character app client secret
+* USER_AGENT: app name
+* USERNAME: reddit account username
+* PASSWORD: reddit account password
 
 ## Usage
 
