@@ -27,9 +27,9 @@ reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
 ## Usage
 
 ```sh
-$ python3 scrapper.py
+$ python3 scrapper.py -h
 
-usage: scrapper.py [-h] [-l LIMIT] [-p PERIOD] subreddit
+usage: scrapper.py [-h] [-l LIMIT] [-p PERIOD] [-d DIRECTORY] subreddit
 
 positional arguments:
   subreddit             The subreddit from which you wish to download the
@@ -42,6 +42,9 @@ optional arguments:
   -p PERIOD, --period PERIOD
                         The period from when to download the pictures
                         (default: day) -- options: day, month, year, all
+  -d DIRECTORY, --directory DIRECTORY
+                        The directory for the pictures to be downloaded into
+                        (default: reddit-wallpapers/)
 ```
 
 ## Author
