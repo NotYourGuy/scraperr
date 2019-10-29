@@ -2,7 +2,9 @@
 
 import argparse
 import os
+import sys
 import praw
+import prawcore
 import urllib
 
 # Initialize reddit using your credentials http://www.storybench.org/how-to-scrape-reddit-with-python/
@@ -26,7 +28,17 @@ args=parser.parse_args()
 
 hot_subreddit = reddit.subreddit(args.subreddit).top(args.period, limit=args.limit)
 
-url = [post.url for post in hot_subreddit]
+try:
+    url = [post.url for post in hot_subreddit]
+except prawcore.ResponseException:
+    print('An error occurred during authorisation. Please check that your Reddit app credentials are set correctly and try again.')
+    sys.exit(-1)
+except prawcore.OAuthException:
+    print('An error occurred during authorisation. Please check that your Reddit account credentials are set correctly and try again.')
+    sys.exit(-2)
+except prawcore.NotFound:
+    print('Failed to find a subreddit called "{}". Please check that the subreddit exists and try again.'.format(args.subreddit))
+    sys.exit(-3)
 
 # https://stackoverflow.com/a/3173388
 def download_wallpaper():
