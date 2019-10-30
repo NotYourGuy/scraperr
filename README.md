@@ -15,14 +15,28 @@ PRAW (https://praw.readthedocs.io/en/latest/) is required for this script to run
 ```sh 
 $ pip3 install praw
 ```
-Also, inside the script you need to modify the access lines (as described [here](http://www.storybench.org/how-to-scrape-reddit-with-python/))
+Also, inside the ```praw.ini``` file you need to modify the access lines (as described [here](http://www.storybench.org/how-to-scrape-reddit-with-python/))
 ```sh
-reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
-                     client_secret='YOUR_CLIENT_SECRET',
-                     user_agent='YOUR_APP_NAME',
-                     username='YOUR_USERNAME',
-                     password='YOUR_PASSWORD')
+[myapp]
+; this is your 14 character personal use script
+client_id= 
+; this is your 27 character secret
+client_secret= 
+; this is the name you gave your application
+user_agent= 
+; this is username for the reddit account the app was created with
+username=  
+; password for the account
+password=
 ```
+
+Alternatively, you can set the following environment variables when running the script:
+
+* CLIENT_ID: 14 character app client ID
+* CLIENT_SECRET: 27 character app client secret
+* USER_AGENT: app name
+* USERNAME: reddit account username
+* PASSWORD: reddit account password
 
 ## Usage
 

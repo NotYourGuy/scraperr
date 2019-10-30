@@ -6,11 +6,7 @@ import praw
 import urllib
 
 # Initialize reddit using your credentials http://www.storybench.org/how-to-scrape-reddit-with-python/
-reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
-                     client_secret='YOUR_CLIENT_SECRET',
-                     user_agent='YOUR_APP_NAME',
-                     username='YOUR_USERNAME',
-                     password='YOUR_PASSWORD')
+reddit = praw.Reddit("scraperr")
 
 parser = argparse.ArgumentParser()
 
