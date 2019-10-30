@@ -15,9 +15,12 @@ PRAW (https://praw.readthedocs.io/en/latest/) is required for this script to run
 ```sh 
 $ pip3 install praw
 ```
-Also, inside the ```praw.ini``` file you need to modify the access lines (as described [here](http://www.storybench.org/how-to-scrape-reddit-with-python/))
+Also, inside the ```praw.ini``` file you need to modify the access lines (as described [here](http://www.storybench.org/how-to-scrape-reddit-with-python/)). 
+
+You may also add other accounts by keeping the same structure and changing the line in the ```scraperr.py``` file that matches the name of the code block (eg. ```reddit = praw.Reddit("scraperr")```)
+
 ```sh
-[myapp]
+[scraperr]
 ; this is your 14 character personal use script
 client_id= 
 ; this is your 27 character secret
