@@ -33,14 +33,6 @@ username=
 password=
 ```
 
-Alternatively, you can set the following environment variables when running the script:
-
-* CLIENT_ID: 14 character app client ID
-* CLIENT_SECRET: 27 character app client secret
-* USER_AGENT: app name
-* USERNAME: reddit account username
-* PASSWORD: reddit account password
-
 ## Usage
 
 ```sh
