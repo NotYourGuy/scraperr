@@ -6,6 +6,7 @@ import sys
 import praw
 import prawcore
 import urllib
+import shutil
 
 # Initialize reddit using your credentials http://www.storybench.org/how-to-scrape-reddit-with-python/
 reddit = praw.Reddit("scraperr")
@@ -48,6 +49,10 @@ except prawcore.NotFound:
 # https://stackoverflow.com/a/3173388
 
 def main():
+    # check if wget is installed on the system
+    if shutil.which("wget") is None:
+        print('wget not found on system')
+        sys.exit(-4)
     download_wallpaper()
 
 def download_wallpaper():
