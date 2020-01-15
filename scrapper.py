@@ -47,6 +47,9 @@ except prawcore.NotFound:
 
 # https://stackoverflow.com/a/3173388
 
+def main():
+    download_wallpaper()
+
 def download_wallpaper():
     for value in url:
         name = os.path.basename(value) # taking only the value after '/' from the url as name
@@ -61,3 +64,5 @@ def download_wallpaper():
             urllib.request.urlretrieve(value, filename) # if the file doesn't exist, it gets downloaded
 
 download_wallpaper()
+if __name__ == "__main__":
+    main()
