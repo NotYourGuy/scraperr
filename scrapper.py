@@ -60,5 +60,4 @@ def download_wallpaper():
         if not os.path.isfile(filename):
             urllib.request.urlretrieve(value, filename) # if the file doesn't exist, it gets downloaded
 
-download_wallpaper()download_wallpaper()
 download_wallpaper()
