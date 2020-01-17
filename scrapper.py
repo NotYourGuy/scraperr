@@ -62,6 +62,10 @@ def main():
     if os.path.isfile(os.path.join(os.getcwd(), "ripme.jar")) is False:
         print('ripme not in working directory')
         sys.exit(-5)
+    # check if some form of openjdk is installed
+    if shutil.which("java") is None:
+        print('java not found on system')
+        sys.exit(-6)
     download_urls()
 
 
