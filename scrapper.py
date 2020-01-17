@@ -1,12 +1,11 @@
 #! /usr/bin/python3
 
 import argparse
-import os
 import sys
 import praw
 import prawcore
-import urllib
 import shutil
+import subprocess
 
 # Initialize reddit using your credentials http://www.storybench.org/how-to-scrape-reddit-with-python/
 reddit = praw.Reddit("scraperr")
