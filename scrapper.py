@@ -56,6 +56,9 @@ def main():
     download_wallpaper()
 
 def download_wallpaper():
+    download_urls()
+
+def download_urls():
     for value in url:
         name = os.path.basename(value) # taking only the value after '/' from the url as name
         
@@ -67,6 +70,10 @@ def download_wallpaper():
         os.makedirs(os.path.dirname(args.directory), exist_ok=True)
         if not os.path.isfile(filename):
             urllib.request.urlretrieve(value, filename) # if the file doesn't exist, it gets downloaded
+        subprocess.call(["wget",
+        value,
+        "--directory-prefix",
+        args.directory])
 
 download_wallpaper()
 if __name__ == "__main__":
