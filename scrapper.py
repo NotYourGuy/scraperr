@@ -67,10 +67,25 @@ def main():
 
 def download_urls():
     for value in url:
-        subprocess.call(["wget",
-        value,
-        "--directory-prefix",
-        args.directory])
+        # skip on self posts
+        if "www.reddit.com" in url:
+            print('reddit selfpost detected, skipping...')
+            continue
+        # wget on reddit images or imgur
+        if "i.redd.it" in url or "i.imgur.com" in url:
+            subprocess.call(["wget",
+                             value,
+                             "--directory-prefix",
+                             args.directory])
+        # ripme for everything else
+        subprocess.call(["java",
+                         "-jar",
+                         "ripme.jar",
+                         "--ripsdirectory",
+                         args.directory,
+                         "--url",
+                         url])
+
 
 if __name__ == "__main__":
     main()
