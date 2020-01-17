@@ -25,13 +25,9 @@ parser.add_argument('-p', '--period', default='day',
 parser.add_argument('-d', '--directory', default='reddit-wallpapers/',
                     help='The directory for the pictures to be downloaded into (default: reddit-wallpapers/)', action='store')
 
-args=parser.parse_args()
 args = parser.parse_args()
 
-
 hot_subreddit = reddit.subreddit(args.subreddit).top(args.period, limit=args.limit)
-hot_subreddit = reddit.subreddit(args.subreddit).top(
-    args.period, limit=args.limit)
 
 try:
     url = [post.url for post in hot_subreddit]
@@ -52,28 +48,14 @@ def main():
     if shutil.which("wget") is None:
         print('wget not found on system')
         sys.exit(-4)
-    download_wallpaper()
-
-def download_wallpaper():
     download_urls()
 
 def download_urls():
     for value in url:
-        name = os.path.basename(value) # taking only the value after '/' from the url as name
-        
-        os.makedirs(os.path.dirname(args.directory), exist_ok=True) # makes the directory where the photos are saved if it doesn't exist https://stackoverflow.com/a/12517490
-        
-        filename = os.path.join(args.directory, name) # combine the name and the downloads directory to get the local filename
-        
-        # makes the directory where the photos are saved if it doesn't exist https://stackoverflow.com/a/12517490
-        os.makedirs(os.path.dirname(args.directory), exist_ok=True)
-        if not os.path.isfile(filename):
-            urllib.request.urlretrieve(value, filename) # if the file doesn't exist, it gets downloaded
         subprocess.call(["wget",
         value,
         "--directory-prefix",
         args.directory])
 
-download_wallpaper()
 if __name__ == "__main__":
     main()
