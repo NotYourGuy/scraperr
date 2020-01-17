@@ -6,6 +6,7 @@ import praw
 import prawcore
 import shutil
 import subprocess
+import os
 
 # Initialize reddit using your credentials:
 # http://www.storybench.org/how-to-scrape-reddit-with-python/
@@ -51,12 +52,18 @@ except prawcore.NotFound:
 
 # https://stackoverflow.com/a/3173388
 
+
 def main():
     # check if wget is installed on the system
     if shutil.which("wget") is None:
         print('wget not found on system')
         sys.exit(-4)
+    # check if ripme is in the cwd
+    if os.path.isfile(os.path.join(os.getcwd(), "ripme.jar")) is False:
+        print('ripme not in working directory')
+        sys.exit(-5)
     download_urls()
+
 
 def download_urls():
     for value in url:
