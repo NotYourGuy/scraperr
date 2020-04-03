@@ -54,42 +54,24 @@ except prawcore.NotFound:
 
 
 def main():
-    # check if wget is installed on the system
-    if shutil.which("wget") is None:
-        print('wget not found on system')
+    # check if gallery-dl is installed on the system
+    if shutil.which("gallery-dl") is None:
+        print('gallery-dl not found on system')
         sys.exit(-4)
-    # check if ripme is in the cwd
-    if os.path.isfile(os.path.join(os.getcwd(), "ripme.jar")) is False:
-        print('ripme not in working directory')
-        sys.exit(-5)
-    # check if some form of openjdk is installed
-    if shutil.which("java") is None:
-        print('java not found on system')
-        sys.exit(-6)
     download_urls()
 
 
 def download_urls():
     for value in url:
-        # skip on self posts
-        if "www.reddit.com" in value:
-            print('reddit selfpost detected, skipping...')
-            continue
-        # wget on reddit images or imgur
-        if "i.redd.it" in value or "i.imgur.com" in value:
-            subprocess.call(["wget",
-                             value,
-                             "--directory-prefix",
-                             args.directory])
-            continue
-        # ripme for everything else
-        subprocess.call(["java",
-                         "-jar",
-                         "ripme.jar",
-                         "--ripsdirectory",
+        subprocess.call(["gallery-dl",
+                         value,
+                         "--dest",
                          args.directory,
-                         "--url",
-                         value])
+                         "--verbose",
+                         "--write-log",
+                         "gallery-dl.log",
+                         "--write-unsupported",
+                         "gallery-dl-unsupported.log"])
 
 
 if __name__ == "__main__":
