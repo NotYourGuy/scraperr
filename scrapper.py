@@ -69,9 +69,11 @@ def download_urls():
                          args.directory,
                          "--verbose",
                          "--write-log",
-                         "gallery-dl.log",
+                         os.path.join(args.directory,
+                                      "gallery-dl.log"),
                          "--write-unsupported",
-                         "gallery-dl-unsupported.log"])
+                         os.path.join(args.directory,
+                                      "gallery-dl-unsupported.log")])
 
 
 if __name__ == "__main__":
