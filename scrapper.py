@@ -1,11 +1,12 @@
 #! /usr/bin/python3
 
 import argparse
-import os
 import sys
 import praw
 import prawcore
-import urllib
+import shutil
+import subprocess
+import os
 
 # Initialize reddit using your credentials:
 # http://www.storybench.org/how-to-scrape-reddit-with-python/
@@ -52,18 +53,28 @@ except prawcore.NotFound:
 # https://stackoverflow.com/a/3173388
 
 
-def download_wallpaper():
+def main():
+    # check if gallery-dl is installed on the system
+    if shutil.which("gallery-dl") is None:
+        print('gallery-dl not found on system')
+        sys.exit(-4)
+    download_urls()
+
+
+def download_urls():
     for value in url:
-        name = os.path.basename(value)  # taking only the value after '/' from the url as name # noqa: E501
+        subprocess.call(["gallery-dl",
+                         value,
+                         "--dest",
+                         args.directory,
+                         "--verbose",
+                         "--write-log",
+                         os.path.join(args.directory,
+                                      "gallery-dl.log"),
+                         "--write-unsupported",
+                         os.path.join(args.directory,
+                                      "gallery-dl-unsupported.log")])
 
-        os.makedirs(os.path.dirname(args.directory), exist_ok=True)  # makes the directory where the photos are saved if it doesn't exist https://stackoverflow.com/a/12517490 # noqa: E501
 
-        filename = os.path.join(args.directory, name)  # combine the name and the downloads directory to get the local filename # noqa: E501
-
-        # makes the directory where the photos are saved if it doesn't exist https://stackoverflow.com/a/12517490 # noqa: E501
-        os.makedirs(os.path.dirname(args.directory), exist_ok=True)
-        if not os.path.isfile(filename):
-            urllib.request.urlretrieve(value, filename)  # if the file doesn't exist, it gets downloaded # noqa: E501
-
-
-download_wallpaper()
+if __name__ == "__main__":
+    main()
