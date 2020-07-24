@@ -62,18 +62,19 @@ def main():
 
 
 def download_urls():
-    for value in url:
-        subprocess.call(["gallery-dl",
-                         value,
-                         "--dest",
-                         args.directory,
-                         "--verbose",
-                         "--write-log",
-                         os.path.join(args.directory,
-                                      "gallery-dl.log"),
-                         "--write-unsupported",
-                         os.path.join(args.directory,
-                                      "gallery-dl-unsupported.log")])
+	cmd = ["gallery-dl"]
+	for value in url:
+	        cmd.append(value)
+	cmd.append("--dest")
+	cmd.append(args.directory)
+	cmd.append("--verbose")
+	cmd.append("--write-log")
+	cmd.append(os.path.join(args.directory,
+				            "gallery-dl.log"))
+	cmd.append("--write-unsupported")
+	cmd.append(os.path.join(args.directory,
+				            "gallery-dl-unsupported.log"))
+	subprocess.call(cmd)
 
 
 if __name__ == "__main__":
