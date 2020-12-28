@@ -7,6 +7,7 @@ import prawcore
 import shutil
 import subprocess
 import os
+import errno
 
 # Initialize reddit using your credentials:
 # http://www.storybench.org/how-to-scrape-reddit-with-python/
@@ -62,19 +63,30 @@ def main():
 
 
 def download_urls():
-	cmd = ["gallery-dl"]
-	for value in url:
-	        cmd.append(value)
-	cmd.append("--dest")
-	cmd.append(args.directory)
-	cmd.append("--verbose")
-	cmd.append("--write-log")
-	cmd.append(os.path.join(args.directory,
-				            "gallery-dl.log"))
-	cmd.append("--write-unsupported")
-	cmd.append(os.path.join(args.directory,
-				            "gallery-dl-unsupported.log"))
-	subprocess.call(cmd)
+    cmd = ["gallery-dl"]
+    cmd.append("--dest")
+    cmd.append(args.directory)
+    cmd.append("--verbose")
+    cmd.append("--write-log")
+    cmd.append(os.path.join(args.directory,
+                            "gallery-dl.log"))
+    cmd.append("--write-unsupported")
+    cmd.append(os.path.join(args.directory,
+                            "gallery-dl-unsupported.log"))
+    cmd.append("-i-")
+
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+    for value in url:
+        try:
+            p.stdin.write((value+'\n').encode())
+        except IOError as e:
+            if e.errno == errno.EPIPE or e.errno == errno.EINVAL:
+                break
+            else:
+                raise
+
+    p.stdin.close()
+    p.wait()
 
 
 if __name__ == "__main__":
